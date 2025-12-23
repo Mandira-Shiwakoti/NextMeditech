@@ -66,7 +66,7 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
         </div>
 		<!-- About Us Area End -->
 		<!-- Testimonial Area Start -->
-      <!--  <div class="testimonials-area gray-bg pt-100 pb-100">
+      <div class="testimonials-area gray-bg pt-100 pb-100">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
@@ -100,9 +100,9 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid'])) {
                 </div>
             </div>
         </div>
-		<!-- Testimonial Area End -->
+		<!-- Testimonial Area End -->>
 		<!-- Team Area Start -->
-	<!--	<div class="team-area pt-95 pb-70">
+		<div class="team-area pt-95 pb-70">
             <div class="container">
                 <div class="product-top-bar section-border mb-50">
                     <div class="section-title-wrap style-two text-center">

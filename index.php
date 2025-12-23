@@ -15,8 +15,13 @@
                     <div class="container">
                         <div class="slider-content slider-animated-1">
                             <h1 class="animated">We Are <span class="theme-color">Next Meditech  </span></h1>
-                            <h1 class="animated">People. Products. Progress.</h1>
-                            <p style="color:#6E0A15; font-weight:500;font-size:20px;">Empowering healthcare professionals across Nepal with certified medical technology (EU CE, US FDA, and more).</p>
+                             <h3 class="animated hero-equal" style="color:#0D0D0D; font-weight:600;font-size:24px;">
+                             Importer and Distributor of Advanced Medical Equipment for Hospitals,
+                             Clinics and Research Institutions in Nepal
+                             </h3>
+                            <p style="color:#6E0A15; font-weight:500;font-size:20px;">
+                                Trusted global partnerships · Certified medical systems · Complete hospital solutions
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -34,9 +39,7 @@
                                <h2>About US</h2>
                                 <div class="banner-content">
                                    <p>
-                                        At Next Meditech, our strength lies in our people, our products, and our commitment to progress. With a dedicated team of over 20 professionals across Administration, Customer Service, Sales, Technical Service, Marketing, and Application Support, we continuously invest in talent to drive innovation, deliver excellence, and empower healthcare professionals.
-                                        Partnering with more than 20 leading companies worldwide, we provide certified medical technology (EU CE, US FDA, and more) and bring the latest, most advanced medical equipment to Nepal.
-                                    </p>
+                                        
                                 </div>
                             </div>
                         </div>

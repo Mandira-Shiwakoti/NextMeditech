@@ -508,7 +508,7 @@ try {
                                     </td>
                                     <td>
                                         <form id="form-<?= $page['id'] ?? '' ?>" method="post" class="inline-form">
-                                            <input type="hidden" name="id" value="<?= $page['id'] ?? '' ?>">
+                                            
                                             <input type="hidden" name="content" value="<?= htmlspecialchars($content) ?>">
                                             <div class="action-buttons">
                                                 <button type="submit" name="action" value="edit" class="btn btn-success btn-sm">Save</button>
