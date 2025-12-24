@@ -70,6 +70,7 @@
                                             </li>
                                            
                                              <li><a href="our-services.php">Our Services</a></li>
+                                             <li><a href="our-partners.php">Partners</a>
                                             <li><a href="contact.php">contact Us</a></li>
                                         </ul>
                                     </nav>
