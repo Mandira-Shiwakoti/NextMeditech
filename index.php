@@ -1,6 +1,20 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
-   
+<?php 
+require_once "head.php";
+  $sql="SELECT * FROM `pages` WHERE `id`=1";
+  $stmt=$pdo->prepare($sql);
+  $stmt->execute();
+  $page=$stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
+<?php 
+require_once "head.php";
+  $sql="SELECT * FROM `pages` WHERE `id`=2";
+  $stmt=$pdo->prepare($sql);
+  $stmt->execute();
+  $mission=$stmt->fetch(PDO::FETCH_ASSOC);
+?>
 
     
 <?php include 'head.php' ?>
@@ -38,7 +52,7 @@
                             <div class="single-banner">
                                <h2>About US</h2>
                                 <div class="banner-content">
-                                   <p>
+                                  <p><?php echo $page['detail']; ?></p>
                                         
                                 </div>
                             </div>
@@ -46,7 +60,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="single-banner img-zoom mb-30">
                                 <a href="#">
-                                    <img src="assets/img/product/aboutus.jpg" alt="">
+                                    <img src="assets/img/product/aboutus.jpg" style="margin-top: 70px;" alt="">
                                 </a>
                                 
                             </div>
@@ -66,7 +80,7 @@
                             <div class="single-testimonial text-center">
                                 <h2>Our Mission/Vision</h2>
                                 <p>
-                                    We are committed to empowering healthcare professionals with cutting-edge, certified medical technology and exceptional support, enabling them to deliver superior patient care across Nepal.
+                                    <?php echo htmlspecialchars_decode($mission['detail']); ?>
                                     </p>
                                 
                             </div>
