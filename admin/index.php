@@ -187,8 +187,8 @@ if (!isset($_SESSION['user_id'])) {
             <div class="pseudo-gallery">
                 <div class="gallery-item">
                     <div>📊</div>
-                    <h3>Equipment</h3>
-                    <p><a href="admin/equipment.php" style="color:#007bff; text-decoration:none;">Manage Equipment</a></p>
+                    <h3>Product Categories</h3>
+                    <p><a href="admin/product_categories.php" style="color:#007bff; text-decoration:none;">Manage Equipment</a></p>
                 </div>
                 <div class="gallery-item">
                     <div>👥</div>
