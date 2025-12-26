@@ -26,7 +26,8 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Categories</title>
     <base href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/'; ?>">
-    <?php include '../head.php'; ?>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   
     <style>
         body {
     margin: 0;
@@ -70,9 +71,9 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /* Buttons */
-button {
-    padding: 8px 12px;
-    margin: 2px;
+.admin-content button {
+    padding: 4px 8px;
+    margin: 1px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -94,6 +95,10 @@ button {
 
 img {
     border-radius: 4px;
+}
+.admin-content a{
+    text-decoration: none;
+    color: white;
 }
     </style>
     
@@ -139,7 +144,7 @@ img {
                             <td>
                                <button class="btn btn-primary"> <a href="admin/edit-product-category.php?id=<?= $category['id']; ?>"> Edit</a></button>
                                <button class="btn btn-danger"> <a href="admin/delete-product-category.php?id=<?= $category['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a></button><br>
-                               <button class="btn btn-secondary"><a href="offerings-list.php?category_id=<?= $category['id']; ?>">View Offerings</a></button>
+                               <button class="btn btn-secondary"><a href="admin/view-product-offerings.php?category_id=<?= $category['id']; ?>">View Offerings</a></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
