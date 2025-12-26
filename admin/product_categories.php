@@ -5,6 +5,11 @@ if (!isset($_SESSION['user_id']) || strtolower(trim($_SESSION['role'])) !== 'adm
     exit();
 }
 
+if(isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+
 require_once '../classes/connect-db.php';
 
 $sql="SELECT * FROM `product_categories` ORDER BY `id` DESC";
@@ -20,6 +25,8 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Categories</title>
+    <base href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/'; ?>">
+    <?php include '../head.php'; ?>
     <style>
         body {
     margin: 0;
@@ -63,6 +70,13 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /* Buttons */
+button {
+    padding: 8px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 .btn-add {
     display: inline-block;
     margin-bottom: 10px;
@@ -83,14 +97,16 @@ img {
 }
     </style>
     
+    
 
 </head>
 <body>
+    
 <div class="admin-wrapper">
     <?php include 'sidebar.php'; ?>
     <div class="admin-content">
         <h2>Product Categories</h2>
-        <a href="add-category.php" class="btn-add">➕ Add Category</a>
+        <a href="admin/add-product-category.php" class="btn-add">➕ Add Category</a>
 
         <table class="admin-table">
             <thead>
@@ -121,9 +137,9 @@ img {
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="edit-category.php?id=<?= $category['id']; ?>">✏️ Edit</a> |
-                                <a href="delete-category.php?id=<?= $category['id']; ?>" onclick="return confirm('Are you sure?');">🗑️ Delete</a> |
-                                <a href="offerings-list.php?category_id=<?= $category['id']; ?>">View Offerings</a>
+                               <button class="btn btn-primary"> <a href="admin/edit-product-category.php?id=<?= $category['id']; ?>"> Edit</a></button>
+                               <button class="btn btn-danger"> <a href="admin/delete-product-category.php?id=<?= $category['id']; ?>" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a></button><br>
+                               <button class="btn btn-secondary"><a href="offerings-list.php?category_id=<?= $category['id']; ?>">View Offerings</a></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

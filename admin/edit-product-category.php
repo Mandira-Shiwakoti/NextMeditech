@@ -7,10 +7,35 @@ if (!isset($_SESSION['user_id']) || strtolower(trim($_SESSION['role'])) !== 'adm
 
 require_once '../classes/connect-db.php';
 
-// Initialize variables
-$title = $slug = $intro = $meta_description = '';
-$message = '';
+// Get category ID from URL
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: product_categories.php');
+    exit();
+}
+
+$categoryId = (int)$_GET['id'];
+
+// Fetch existing category
+$stmt = $pdo->prepare("SELECT * FROM product_categories WHERE id = :id");
+$stmt->execute([':id' => $categoryId]);
+$category = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$category) {
+    // Category not found
+    $_SESSION['success_message'] = "Category not found!";
+    header('Location: product_categories.php');
+    exit();
+}
+
+// Initialize variables with existing data
+$title = $category['title'];
+$slug = $category['slug'];
+$intro = $category['intro'];
+$meta_description = $category['meta_description'];
+$currentImage = $category['image'];
+
 $error = '';
+$message = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,38 +44,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $intro = trim($_POST['intro']);
     $meta_description = trim($_POST['meta_description']);
 
-    // Handle image upload
-    $imageName = '';
+    // Handle new image upload
     if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
         $imageTmp = $_FILES['image']['tmp_name'];
-        $imageName = time() . '_' . basename($_FILES['image']['name']); // Unique filename
+        $imageName = time() . '_' . basename($_FILES['image']['name']);
         $uploadDir = '../uploads/';
         $uploadFile = $uploadDir . $imageName;
 
-        if (!move_uploaded_file($imageTmp, $uploadFile)) {
-            $error = "Failed to upload image.";
+        if (move_uploaded_file($imageTmp, $uploadFile)) {
+            // Delete old image if exists
+            if (!empty($currentImage) && file_exists($uploadDir . $currentImage)) {
+                unlink($uploadDir . $currentImage);
+            }
+            $currentImage = $imageName;
+        } else {
+            $error = "Failed to upload new image.";
         }
     }
 
     if (!$error) {
-        // Insert into database
-        $sql = "INSERT INTO product_categories (title, slug, intro, meta_description, image) VALUES (:title, :slug, :intro, :meta_description, :image)";
+        // Update category in database
+        $sql = "UPDATE product_categories 
+                SET title = :title, slug = :slug, intro = :intro, meta_description = :meta_description, image = :image
+                WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $result = $stmt->execute([
             ':title' => $title,
             ':slug' => $slug,
             ':intro' => $intro,
             ':meta_description' => $meta_description,
-            ':image' => $imageName
+            ':image' => $currentImage,
+            ':id' => $categoryId
         ]);
 
         if ($result) {
-           //set a success message
-           $_SESSION['message'] = "Category added successfully.";
-           header("Location: product_categories.php");
-           exit();
+            $_SESSION['success_message'] = "Category updated successfully!";
+            header('Location: product_categories.php');
+            exit();
         } else {
-            $error = "Failed to add category.";
+            $error = "Failed to update category.";
         }
     }
 }
@@ -62,12 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product Category</title>
+    <title>Edit Product Category</title>
     <style>
         body { margin:0; font-family: Arial, sans-serif; }
         .admin-wrapper { display:flex; min-height:100vh; }
         .sidebar { width:220px; background:#1e293b; color:#fff; padding:20px; margin-right:20px; }
-        .admin-content { flex:1; padding:20px; background:#f8fafc;margin-left: 250px; }
+        .admin-content { flex:1; padding:20px; background:#f8fafc; margin-left: 250px; }
         .form-group { margin-bottom:15px; }
         label { display:block; margin-bottom:5px; font-weight:bold; }
         input[type="text"], textarea, input[type="file"] {
@@ -78,24 +110,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .message { padding:10px; margin-bottom:15px; border-radius:4px; }
         .success { background:#d1fae5; color:#065f46; }
         .error { background:#fee2e2; color:#b91c1c; }
+        img { margin-top:10px; border-radius:4px; }
     </style>
 </head>
 <body>
 <div class="admin-wrapper">
     <?php include 'sidebar.php'; ?>
-    <?php if(!empty($message)): ?>
-        <div id="success-msg" style="
-        background-color: #d1fae5;
-        color: #065f46;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 4px;
-        ">
-        <?=htmlspecialchars($message) ?></div>
-    <?php endif;
-    ?>
     <div class="admin-content">
-        <h2>Add Product Category</h2>
+        <h2>Edit Product Category</h2>
 
         <?php if ($message): ?>
             <div class="message success"><?= $message ?></div>
@@ -122,22 +144,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea name="meta_description"><?= htmlspecialchars($meta_description) ?></textarea>
             </div>
             <div class="form-group">
-                <label>Image</label>
+                <label>Current Image</label>
+                <?php if ($currentImage): ?>
+                    <img src="../uploads/<?= htmlspecialchars($currentImage) ?>" alt="Category Image" width="120">
+                <?php else: ?>
+                    No image
+                <?php endif; ?>
+            </div>
+            <div class="form-group">
+                <label>Change Image</label>
                 <input type="file" name="image" accept="image/*">
             </div>
-            <button type="submit">Add Category</button>
+            <button type="submit">Update Category</button>
         </form>
     </div>
 </div>
-<script>
-    // Auto-hide success message after 3 seconds
-    setTimeout(function() {
-        var msg = document.getElementById('success-msg');
-        if(msg) {
-            msg.style.display = 'none';
-        }
-    }, 5000);
-</script>
-
 </body>
 </html>
