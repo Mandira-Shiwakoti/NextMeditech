@@ -205,6 +205,11 @@ if (!isset($_SESSION['user_id'])) {
                     <h3>Partners</h3>
                     <p><a href="admin/partner.php" style="color:#007bff; text-decoration:none;">Manage Partners</a></p>
                 </div>
+                <div class="gallery-item">
+                    <div>🩺</div>
+                    <h3>Services</h3>
+                    <p><a href="admin/services.php" style="color:#007bff; text-decoration:none;">Manage Services</a></p>
+                </div>
                 
                
             </div>

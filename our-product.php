@@ -9,7 +9,7 @@
 			<div class="container">
 				<div class="row">
 	<?php			    
-$stmt = $pdo->query("SELECT * FROM equipmentcat ORDER BY sort_order ASC");
+$stmt = $pdo->query("SELECT * FROM product ORDER BY sort_order ASC");
 
 while ($row = $stmt->fetch()) {
     $cid = $row['id'];

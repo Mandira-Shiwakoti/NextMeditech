@@ -83,6 +83,9 @@
             <li class="menu-section">Partners</li>
             <li><a href="/admin/partner.php">Partners</a></li>
             <li><a href="/admin/add-partner.php">Add new Partner</a></li>
+            <li class="menu-section">Services</li>
+            <li><a href="/admin/services.php">Services</a></li>
+            <li><a href="/admin/add-service.php">Add new Service</a></li>
         </ul>
     </div>
 
