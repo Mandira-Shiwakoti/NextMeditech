@@ -202,14 +202,10 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div class="gallery-item">
                     <div>🖼️</div>
-                    <h3>Product Images</h3>
-                    <p><a href="admin/products.php" style="color:#007bff; text-decoration:none;">Manage Product Images</a></p>
+                    <h3>Partners</h3>
+                    <p><a href="admin/partner.php" style="color:#007bff; text-decoration:none;">Manage Partners</a></p>
                 </div>
-                <div class="gallery-item">
-                    <div>⚙️</div>
-                    <h3>Subcategory</h3>
-                    <p><a href="admin/subcategory.php" style="color:#007bff; text-decoration:none;">Manage Equipment Subcategory</a></p>
-                </div>
+                
                
             </div>
         </div>
