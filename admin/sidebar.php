@@ -80,10 +80,9 @@
            <li><a href="/admin/equipment-category-form.php?action=add" >Add New Category</a></li>
             <li class="menu-section">Pages</li>
             <li><a href="/admin/pages.php">Pages</a></li>
-            <li class="menu-section">Product</li>
-            <li><a href="/admin/products.php">Product Images</a></li>
-            <li class="menu-section">SubCategory</li>
-            <li><a href="/admin/subcategory.php">Equipment SubCategory</a></li>
+            <li class="menu-section">Partners</li>
+            <li><a href="/admin/partner.php">Partners</a></li>
+            <li><a href="/admin/add-partner.php">Add new Partner</a></li>
         </ul>
     </div>
 
