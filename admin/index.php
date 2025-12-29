@@ -188,7 +188,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="gallery-item">
                     <div>📊</div>
                     <h3>Product Categories</h3>
-                    <p><a href="admin/product_categories.php" style="color:#007bff; text-decoration:none;">Manage Equipment</a></p>
+                    <p><a href="admin/product_categories.php" style="color:#007bff; text-decoration:none;">Manage Product and Offerings</a></p>
                 </div>
                 <div class="gallery-item">
                     <div>👥</div>
