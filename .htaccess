@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^testpage$ contact.php
+
+# Make sure existing files/folders are not rewritten
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite products/slug to product-details.php?slug=slug
+RewriteRule ^products/([a-zA-Z0-9-_]+)$ products.php?slug=$1 [L,QSA]

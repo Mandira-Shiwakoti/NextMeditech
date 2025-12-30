@@ -9,17 +9,19 @@
 			<div class="container">
 				<div class="row">
 	<?php			    
-$stmt = $pdo->query("SELECT * FROM equipmentcat ORDER BY sort_order ASC");
+$stmt = $pdo->query("SELECT * FROM product_categories ORDER BY id ASC");
 
 while ($row = $stmt->fetch()) {
     $cid = $row['id'];
-    $name = $row['cat_name'];
-    $image = $row['image']; // path to image
+    $name = $row['title'];
+    $image = $row['image'];
+    $intro = $row['intro']; 
+    $slug=$row['slug'];
     ?>
     <div class="col-lg-4 col-md-4">
         <div class="blog-single mb-30">
             <div class="blog-thumb">
-                <a href="category.php?cid=<?php echo $cid; ?>">
+                <a href="products/<?php echo urlencode($slug); ?>">
                     <img src="uploads/<?php echo $image; ?>?v=<?php echo date('ymdhis') ?>" alt="<?php echo htmlspecialchars($name); ?>" />
                 </a>
             </div>
