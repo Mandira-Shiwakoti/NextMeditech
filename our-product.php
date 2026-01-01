@@ -21,7 +21,7 @@ while ($row = $stmt->fetch()) {
     <div class="col-lg-4 col-md-4">
         <div class="blog-single mb-30">
             <div class="blog-thumb">
-                <a href="products/<?php echo urlencode($slug); ?>">
+                <a href="products.php?slug=<?php echo htmlspecialchars($slug); ?>">
                     <img src="uploads/<?php echo $image; ?>?v=<?php echo date('ymdhis') ?>" alt="<?php echo htmlspecialchars($name); ?>" />
                 </a>
             </div>
